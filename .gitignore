@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local data (do not commit source datasets unless licensing permits)
+data/
+
+# Generated artifacts
+outputs/
+models/*.pkl
+images/elbow_method.png
+
+# Environment / secrets
+.env
+.env.*
