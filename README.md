@@ -85,7 +85,7 @@ pip install -r requirements.txt
 
 The notebook was developed with the Census Income (KDD) dataset. The source data is not currently stored in this repository. Place the required data and column-definition files in a local `data/` directory before running the notebook.
 
-> **Current reproducibility note:** the notebook still contains local Windows paths from the original development environment. These paths should be replaced with relative `data/` paths before running the notebook on another machine.
+The notebook uses portable project-relative paths. Place `census-bureau.data` and `census-bureau.columns` inside `data/`; generated models, outputs, and visualizations are written to dedicated project folders.
 
 ### 5. Run the notebook
 
@@ -109,10 +109,18 @@ The notebook demonstrates:
 
 This project demonstrates foundational machine learning skills across classification, clustering, preprocessing, model evaluation, and analytical interpretation. It complements production ML, MLOps, and Generative AI projects in an AI/ML engineering portfolio.
 
-## Next Improvements
+## Engineering Improvements Included
 
-- Replace machine-specific file paths with portable relative paths
+- Portable project-relative dataset paths
+- Reproducible train/test split with stratification and fixed random seeds
+- Dedicated `models/`, `outputs/`, and `images/` output locations created by the notebook
+- Saved fitted `StandardScaler` with the clustering model rather than transformed training data
+- Explicit K-Means `n_init` for reproducibility
+- Dependency and Git ignore files for cleaner setup
+
+## Future Enhancements
+
 - Package preprocessing and models into reusable Scikit-learn pipelines
-- Add train/test reproducibility controls and automated tests
+- Add automated tests and CI
 - Add a lightweight inference API
 - Add model-performance and cluster-quality metrics directly to this README
