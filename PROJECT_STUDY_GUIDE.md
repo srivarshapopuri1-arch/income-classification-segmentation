@@ -45,7 +45,7 @@ The original text label is converted to `income_label`. The original `label`, th
 
 ### Step 2: Remove duplicate feature rows
 
-Exact duplicate rows in the feature matrix are removed. The target and working dataframe are kept aligned with the retained indices.
+Exact duplicate observations are removed using the feature values together with the target. This avoids accidentally discarding records that have identical features but different labels. The feature matrix, target, and working dataframe remain aligned.
 
 ### Step 3: Stratified train/test split
 
@@ -143,11 +143,12 @@ Increasing a threshold generally makes positive predictions more selective. That
 The saved classification artifact contains:
 
 - fitted preprocessing transformer;
+- training-derived numeric outlier bounds;
 - fitted Random Forest;
 - selected feature names;
 - probability threshold.
 
-Saving preprocessing with the model is important because future observations need the same transformations used during training.
+Saving preprocessing metadata with the model is important because future observations need the same imputation, encoding, clipping bounds, and feature selection used during training.
 
 ## 5. Customer segmentation workflow
 
@@ -242,18 +243,19 @@ The important changes were:
 
 1. Removed machine-specific Windows paths and switched to project-relative paths.
 2. Added clear checks for missing source files.
-3. Split train/test data before fitting learned classification preprocessing.
-4. Fit imputation and categorical encoding on training data only.
-5. Added handling for unseen categorical values.
-6. Learned outlier bounds from training data only.
-7. Performed correlation feature selection using training data only.
-8. Added ROC-AUC and average precision to the evaluation code.
-9. Clarified the meaning of the 0.7 threshold.
-10. Saved fitted preprocessing components with the models.
-11. Made K-Means reproducible with fixed initialization settings.
-12. Removed the stale root-level generated model artifact.
-13. Cleared stale notebook outputs after changing the methodology.
-14. Improved repository paths, requirements, Git ignores, and README documentation.
+3. Made duplicate removal operate on complete observations so conflicting labels are not silently discarded.
+4. Split train/test data before fitting learned classification preprocessing.
+5. Fit imputation and categorical encoding on training data only.
+6. Added handling for unseen categorical values.
+7. Learned outlier bounds from training data only and saved those bounds with the classifier artifact.
+8. Performed correlation feature selection using training data only.
+9. Added ROC-AUC and average precision to the evaluation code.
+10. Clarified the meaning of the 0.7 threshold.
+11. Saved fitted preprocessing components with the models.
+12. Made K-Means reproducible with fixed initialization settings.
+13. Removed the stale root-level generated model artifact.
+14. Cleared stale notebook outputs after changing the methodology.
+15. Improved repository paths, requirements, Git ignores, and README documentation.
 
 ## 8. What you should not claim
 
