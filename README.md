@@ -1,145 +1,118 @@
+# Income Classification & Customer Segmentation
 
-# README
-## Income Classification & Customer Segmentation Project
+A machine learning portfolio project demonstrating both **supervised classification** and **unsupervised customer segmentation** on census-income data.
 
-Prepared by: Sri Varsha Popuri
+## Project Overview
 
----
+This project solves two related machine learning problems:
 
-## 1. Project Description
+1. **Income Classification** — predicts whether an individual earns more than $50K annually using a Random Forest classifier.
+2. **Customer Segmentation** — groups records into five segments using K-Means clustering to support persona analysis and targeted decision-making.
 
-This project contains two machine learning implementations:
+The notebook covers data loading, preprocessing, exploratory analysis, feature preparation, model training, evaluation, probability-threshold tuning, clustering, cluster profiling, visualization, and model persistence.
 
-1. Income Classification Model (Supervised Learning)
-   - Predicts whether an individual earns more than $50K annually.
-   - Built using a Random Forest Classifier.
-   - Includes probability threshold tuning for business optimization.
+## Machine Learning Workflow
 
-2. Customer Segmentation Model (Unsupervised Learning)
-   - Groups customers into 5 distinct personas using K-Means clustering.
-   - Produces segment-level business insights and marketing strategies.
+### Income Classification
+- Data cleaning and preprocessing
+- Categorical feature encoding
+- Random Forest classification
+- Model evaluation
+- Probability-threshold tuning for decision optimization
 
-The complete implementation is provided in:
-classification_segmentation.ipynb
+### Customer Segmentation
+- Feature selection
+- Standardization
+- K-Means clustering
+- Elbow-method analysis
+- Five-cluster segmentation
+- Cluster profiling and visualization
 
----
+## Tech Stack
 
-## 2. Files Included
+- Python
+- Pandas
+- NumPy
+- Scikit-learn
+- Matplotlib
+- Seaborn
+- Joblib
+- Jupyter Notebook
 
-- classification_segmentation.ipynb – Full implementation (training + evaluation)
-- census_income_final_model.pkl – Saved classification model
-- customer_segmentation_model.pkl – Saved clustering model
-- Final_Customer_Segmentation_Results.csv – Final segmentation output
-- Project Report.pdf – Technical documentation
-- README.md – Execution instructions
+## Repository Contents
 
----
+| File | Purpose |
+| --- | --- |
+| `classification_segmentation.ipynb` | End-to-end analysis, model training, evaluation, and segmentation |
+| `customer_segmentation_model.pkl` | Saved clustering artifact |
+| `segmentation_output.png` | Customer-segmentation visualization |
+| `Project Report.pdf` | Detailed project documentation |
+| `requirements.txt` | Python dependencies |
+| `.gitignore` | Files excluded from version control |
 
-## 3. System Requirements
+## Getting Started
 
-Python Version:
-Python 3.9 or higher (3.10 recommended)
+### 1. Clone the repository
 
-Required Libraries:
-numpy
-pandas
-scikit-learn
-matplotlib
-seaborn
-joblib
-jupyter
+```bash
+git clone https://github.com/srivarshapopuri1-arch/income-classification-segmentation.git
+cd income-classification-segmentation
+```
 
-Install dependencies using:
-
-pip install numpy pandas scikit-learn matplotlib seaborn joblib jupyter
-
----
-
-## 4. Environment Setup (Compilation Step)
-
-Since this project is written in Python, no traditional compilation is required.
-However, environment setup is required before execution.
-
-Step 1: Create Virtual Environment (Recommended)
-
-python -m venv venv
-
-Activate environment:
+### 2. Create a virtual environment
 
 Windows:
+
+```bash
+python -m venv venv
 venv\Scripts\activate
+```
 
-Mac/Linux:
+macOS/Linux:
+
+```bash
+python -m venv venv
 source venv/bin/activate
+```
 
-Step 2: Install Dependencies
+### 3. Install dependencies
 
-pip install numpy pandas scikit-learn matplotlib seaborn joblib jupyter
+```bash
+pip install -r requirements.txt
+```
 
----
+### 4. Add the source dataset
 
-## 5. Execution Instructions
+The notebook was developed with the Census Income (KDD) dataset. The source data is not currently stored in this repository. Place the required data and column-definition files in a local `data/` directory before running the notebook.
 
-Step 1: Navigate to Project Folder
+> **Current reproducibility note:** the notebook still contains local Windows paths from the original development environment. These paths should be replaced with relative `data/` paths before running the notebook on another machine.
 
-cd <project_folder_path>
+### 5. Run the notebook
 
-Step 2: Launch Jupyter Notebook
+```bash
+jupyter notebook classification_segmentation.ipynb
+```
 
-jupyter notebook
+Then run the cells from top to bottom.
 
-Open:
-classification_segmentation.ipynb
+## Outputs
 
-Step 3: Run All Cells
+The notebook demonstrates:
+- Income-classification model training and evaluation
+- Probability-threshold tuning
+- Customer segmentation with K-Means
+- Cluster profiling
+- Segmentation visualization
+- Model artifact generation
 
-Kernel → Restart & Run All
+## Portfolio Context
 
-This will:
-- Load the dataset (census-bureau.data)
-- Perform preprocessing
-- Train Random Forest classification model
-- Evaluate performance metrics
-- Apply probability threshold tuning (0.7)
-- Train K-Means segmentation model
-- Generate Elbow Method visualization
-- Assign customer clusters
-- Save model artifacts and final outputs
+This project demonstrates foundational machine learning skills across classification, clustering, preprocessing, model evaluation, and analytical interpretation. It complements production ML, MLOps, and Generative AI projects in an AI/ML engineering portfolio.
 
----
+## Next Improvements
 
-## 6. Expected Outputs
-
-After successful execution:
-
-Classification:
-- census_income_final_model.pkl
-- Model evaluation metrics displayed in notebook
-
-Segmentation:
-- customer_segmentation_model.pkl
-- Final_Customer_Segmentation_Results.csv
-- Cluster profiling summary table
-
----
-
-## 7. Reproducing Results
-
-To reproduce results:
-
-1. Ensure census-bureau.data is in the same directory as the notebook.
-2. Run all notebook cells from top to bottom.
-3. Confirm output files are generated in the project directory.
-
----
-
-## 8. Notes
-
-- If a scikit-learn version mismatch warning appears when loading .pkl files,
-  retrain the models in your current environment.
-- All preprocessing steps are included within the notebook.
-- Feature scaling (StandardScaler) is applied before clustering to ensure balanced distance calculations.
-
----
-
-End of README
+- Replace machine-specific file paths with portable relative paths
+- Package preprocessing and models into reusable Scikit-learn pipelines
+- Add train/test reproducibility controls and automated tests
+- Add a lightweight inference API
+- Add model-performance and cluster-quality metrics directly to this README
