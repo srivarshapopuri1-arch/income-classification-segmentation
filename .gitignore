@@ -20,6 +20,11 @@ Thumbs.db
 # Local data (do not commit source datasets unless licensing permits)
 data/
 
+# Generated artifacts
+outputs/
+models/*.pkl
+images/elbow_method.png
+
 # Environment / secrets
 .env
 .env.*
