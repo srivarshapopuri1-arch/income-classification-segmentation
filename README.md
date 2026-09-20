@@ -5,7 +5,7 @@ This project explores two machine-learning tasks using the Census Income (KDD) d
 - **Income classification:** predict whether a record belongs to the higher-income class using a Random Forest classifier.
 - **Customer segmentation:** group records into five descriptive segments using K-Means clustering.
 
-The project remains notebook-based so the full analysis can be followed from data loading through modeling and interpretation.
+The project remains notebook-based so the full analysis can be followed from data loading through modeling and interpretation. For a detailed walkthrough and interview preparation notes, see [`PROJECT_STUDY_GUIDE.md`](PROJECT_STUDY_GUIDE.md).
 
 ## Methodology
 
@@ -35,7 +35,7 @@ The segmentation analysis uses demographic and income-related variables from the
 └── outputs/
 ```
 
-`Project Report.pdf` and `segmentation_output.png` are retained from the original project. Generated models and CSV outputs are not committed; rerunning the notebook creates them locally.
+`Project Report.pdf` and `segmentation_output.png` are retained from the original project. Generated models, CSV outputs, and notebook-generated plots are not committed; rerunning the notebook creates them locally.
 
 ## Setup
 
