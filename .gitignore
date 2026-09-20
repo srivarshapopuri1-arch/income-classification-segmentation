@@ -24,6 +24,7 @@ data/
 outputs/
 models/*.pkl
 images/elbow_method.png
+images/segment_sizes.png
 
 # Environment / secrets
 .env
