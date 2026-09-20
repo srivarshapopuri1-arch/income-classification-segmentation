@@ -1,126 +1,102 @@
 # Income Classification & Customer Segmentation
 
-A machine learning portfolio project demonstrating both **supervised classification** and **unsupervised customer segmentation** on census-income data.
+This project explores two machine-learning tasks using the Census Income (KDD) data:
 
-## Project Overview
+- **Income classification:** predict whether a record belongs to the higher-income class using a Random Forest classifier.
+- **Customer segmentation:** group records into five descriptive segments using K-Means clustering.
 
-This project solves two related machine learning problems:
+The project remains notebook-based so the full analysis can be followed from data loading through modeling and interpretation.
 
-1. **Income Classification** — predicts whether an individual earns more than $50K annually using a Random Forest classifier.
-2. **Customer Segmentation** — groups records into five segments using K-Means clustering to support persona analysis and targeted decision-making.
+## Methodology
 
-The notebook covers data loading, preprocessing, exploratory analysis, feature preparation, model training, evaluation, probability-threshold tuning, clustering, cluster profiling, visualization, and model persistence.
+### Income classification
 
-## Machine Learning Workflow
+The workflow removes duplicate feature rows, creates a stratified train/test split, and fits preprocessing only on the training data. Numeric missing values are imputed with the training median. Categorical values are imputed and ordinal-encoded with explicit handling for categories that appear only in the test set.
 
-### Income Classification
-- Data cleaning and preprocessing
-- Categorical feature encoding
-- Random Forest classification
-- Model evaluation
-- Probability-threshold tuning for decision optimization
+Numeric outlier bounds and correlation-based feature selection are also learned from the training partition. A class-weighted Random Forest is then evaluated with classification metrics, ROC-AUC, average precision, a confusion matrix, and a separate 0.7 probability-threshold analysis.
 
-### Customer Segmentation
-- Feature selection
-- Standardization
-- K-Means clustering
-- Elbow-method analysis
-- Five-cluster segmentation
-- Cluster profiling and visualization
+The threshold analysis is included to show the precision/recall trade-off; it is not presented as a universally optimal business threshold.
 
-## Tech Stack
+### Customer segmentation
 
-- Python
-- Pandas
-- NumPy
-- Scikit-learn
-- Matplotlib
-- Seaborn
-- Joblib
-- Jupyter Notebook
+The segmentation analysis uses demographic and income-related variables from the original project. Categorical values are encoded, all selected features are standardized, and K-Means is fitted with a fixed random seed and explicit `n_init`. The notebook includes an elbow diagnostic, cluster-size visualization, and a segment profile table.
 
-## Repository Contents
+## Repository structure
 
-| File | Purpose |
-| --- | --- |
-| `classification_segmentation.ipynb` | End-to-end analysis, model training, evaluation, and segmentation |
-| `customer_segmentation_model.pkl` | Saved clustering artifact |
-| `segmentation_output.png` | Customer-segmentation visualization |
-| `Project Report.pdf` | Detailed project documentation |
-| `requirements.txt` | Python dependencies |
-| `.gitignore` | Files excluded from version control |
-
-## Getting Started
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/srivarshapopuri1-arch/income-classification-segmentation.git
-cd income-classification-segmentation
+```text
+.
+├── classification_segmentation.ipynb
+├── Project Report.pdf
+├── segmentation_output.png
+├── requirements.txt
+├── .gitignore
+├── images/
+├── models/
+└── outputs/
 ```
 
-### 2. Create a virtual environment
+`Project Report.pdf` and `segmentation_output.png` are retained from the original project. Generated models and CSV outputs are not committed; rerunning the notebook creates them locally.
+
+## Setup
+
+Create and activate a virtual environment, then install the dependencies:
+
+```bash
+python -m venv .venv
+```
 
 Windows:
 
 ```bash
-python -m venv venv
-venv\Scripts\activate
+.venv\Scripts\activate
 ```
 
 macOS/Linux:
 
 ```bash
-python -m venv venv
-source venv/bin/activate
+source .venv/bin/activate
 ```
 
-### 3. Install dependencies
+Install packages:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Add the source dataset
+## Data
 
-The notebook was developed with the Census Income (KDD) dataset. The source data is not currently stored in this repository. Place the required data and column-definition files in a local `data/` directory before running the notebook.
+The source dataset is not committed to this repository. To run the notebook, create a `data/` directory and add:
 
-The notebook uses portable project-relative paths. Place `census-bureau.data` and `census-bureau.columns` inside `data/`; generated models, outputs, and visualizations are written to dedicated project folders.
+```text
+data/
+├── census-bureau.data
+└── census-bureau.columns
+```
 
-### 5. Run the notebook
+The notebook checks for both files and raises a clear error if either is missing.
+
+## Run the analysis
 
 ```bash
 jupyter notebook classification_segmentation.ipynb
 ```
 
-Then run the cells from top to bottom.
+Run the notebook from top to bottom. It creates local output directories as needed and writes:
 
-## Outputs
+- classification and clustering artifacts to `models/`
+- segmentation results to `outputs/`
+- generated plots to `images/`
 
-The notebook demonstrates:
-- Income-classification model training and evaluation
-- Probability-threshold tuning
-- Customer segmentation with K-Means
-- Cluster profiling
-- Segmentation visualization
-- Model artifact generation
+## Reproducibility
 
-## Portfolio Context
+Random seeds are fixed for the train/test split, Random Forest, and K-Means steps. Preprocessing and feature selection for classification are fitted on training data only to avoid using test-set information during model development.
 
-This project demonstrates foundational machine learning skills across classification, clustering, preprocessing, model evaluation, and analytical interpretation. It complements production ML, MLOps, and Generative AI projects in an AI/ML engineering portfolio.
+Notebook outputs were cleared after the workflow was corrected because the source dataset is not committed and the revised pipeline could not be rerun from the repository alone. No new performance numbers are claimed until the updated workflow is executed against the source data.
 
-## Engineering Improvements Included
+## Limitations
 
-- Portable project-relative dataset paths
-- Reproducible train/test split with stratification and fixed random seeds
-- Dedicated `models/`, `outputs/`, and `images/` output locations created by the notebook
-- Saved fitted `StandardScaler` with the clustering model rather than transformed training data
-- Explicit K-Means `n_init` for reproducibility
-- Dependency and Git ignore files for cleaner setup
+The classification workflow uses ordinal encoding for categorical variables because it stays close to the original implementation. For a tree-based model this is a practical baseline, but the assigned category numbers should not be interpreted as meaningful order.
 
-## Future Enhancements
+The clustering analysis is exploratory. Including `income_label` among the clustering features makes the resulting segments useful for income-oriented profiling, but it also means the clusters are not independent of the classification target.
 
-- Package preprocessing and models into reusable Scikit-learn pipelines
-- Add automated tests and CI
-- Add a lightweight inference API
-- Add model-performance and cluster-quality metrics directly to this README
+The repository intentionally remains a compact notebook project rather than being expanded into a production application.
