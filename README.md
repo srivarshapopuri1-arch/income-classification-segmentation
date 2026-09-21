@@ -7,6 +7,13 @@ This project explores two machine-learning tasks using the Census Income (KDD) d
 
 The project remains notebook-based so the full analysis can be followed from data loading through modeling and interpretation.
 
+## Technologies Used
+
+**Language & analysis:** Python, Pandas, NumPy, Jupyter Notebook  
+**Machine learning:** Scikit-learn, Random Forest, K-Means  
+**Preprocessing & evaluation:** Scikit-learn pipelines/transformers, classification metrics, ROC-AUC, average precision  
+**Visualization:** Matplotlib, Seaborn
+
 ## Methodology
 
 ### Income classification
